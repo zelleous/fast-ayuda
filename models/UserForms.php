@@ -202,6 +202,7 @@
 
         public function readAll(){
                 $query = 'SELECT
+                user_id,
                 first_name,
                 middle_name,
                 last_name,
@@ -209,9 +210,26 @@
                 suffix,
                 gender,
                 email,
+                password,
                 mobile_number,
+                contact_person,
+                contact_person_number,
                 barangay,
-                user_created
+                unit_number,
+                lot_and_block_number,
+                street,
+                phase,
+                valid_id,
+                civil_status,
+                name_of_spouse,
+                blood_type,
+                voter,
+                precint_number,
+                sector,
+                user_created,
+                user_status,
+                user_type,
+                user_updated
             FROM '. $this->table . '
             ORDER BY
                 user_created DESC';

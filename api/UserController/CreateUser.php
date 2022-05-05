@@ -6,13 +6,13 @@
         }
 
         public function run(){
-            header('Access-Control-Allow-Origins: *');
-            header ('Content-Type: application/x-www-form-urlencoded');
+            header('Access-Control-Allow-Origin: *');
+            header ('Content-Type: application/json');
             header('Access-Control-Allow-Methods: POST');
-            header('Access-Control-Allow-Header: Accecs-Control-Allow-Headers,Access-Control-Allow-Methods,Content-Type, Authorization');
+            header('Access-Control-Allow-Header: Access-Control-Allow-Headers,Access-Control-Allow-Methods,Content-Type, Authorization');
 
-            include_once './config/Database.php';
-            include_once './models/Forms.php';
+            include_once '././config/Database.php';
+            include_once '././models/UserForms.php';
 
             $databse = new Database();
             $db = $databse->connect();
