@@ -241,39 +241,43 @@
 
         public function readSingleUser(){
             $query = 'SELECT
-                        first_name,
-                        middle_name,
-                        last_name,
-                        birthday,
-                        suffix,
-                        gender,
-                        email,
-                        mobile_number,
-                        contact_person,
-                        contact_person_number,
-                        barangay,
-                        unit_number,
-                        lot_and_block_number,
-                        street,
-                        phase,
-                        valid_id,
-                        civil_status,
-                        name_of_spouse,
-                        blood_type,
-                        voter,
-                        precint_number,
-                        sector,
-                        user_created
-
-                    FROM '. $this->table . '
-                    WHERE 
-                        user_id = :user_id';
-
+                user_id,
+                first_name,
+                middle_name,
+                last_name,
+                birthday,
+                suffix,
+                gender,
+                email,
+                mobile_number,
+                contact_person,
+                contact_person_number,
+                barangay,
+                unit_number,
+                lot_and_block_number,
+                street,
+                phase,
+                valid_id,
+                civil_status,
+                name_of_spouse,
+                blood_type,
+                voter,
+                precint_number,
+                sector,
+                user_created,
+                user_status,
+                user_type,
+                user_updated
+                FROM '. $this->table . '
+                WHERE 
+                    user_id = ?
+                LIMIT 0,1';
+                
             $stmt = $this->conn->prepare($query);
 
-            $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+           // $this->user_id = htmlspecialchars(strip_tags($this->user_id));
 
-            $stmt->bindParam(':user_id, $this->user_id');
+            $stmt->bindParam(1, $this->user_id);
 
             $stmt->execute();
 
@@ -281,6 +285,7 @@
 
             $this->user_id = $row['user_id'];
             $this->first_name = $row['first_name'];
+            $this->middle_name = $row['middle_name'];
             $this->last_name = $row['last_name'];
             $this->birthday = $row['birthday'];
             $this->suffix = $row['suffix'];
@@ -301,6 +306,10 @@
             $this->precint_number = $row['precint_number'];      
             $this->sector = $row['sector'];
             $this->valid_id = $row['valid_id'];
+            $this->user_created = $row['user_created'];
+            $this->user_status = $row['user_status'];
+            $this->user_type = $row['user_type'];
+            $this->user_updated = $row['user_updated'];
 
             return $stmt;
         }
