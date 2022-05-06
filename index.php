@@ -1,10 +1,10 @@
 <?php
-    include './route/Route.php';
+    include './route/route.php';
 
-    include './api/UserController/CreateUser.php';
-    include './api/UserController/UpdateUser.php';
-    include './api/UserController/ReadUser.php';
-    include './api/UserController/ReadSingleUser.php';
+    include './api/UserController/create.php';
+    include './api/UserController/update.php';
+    include './api/UserController/read.php';
+    include './api/UserController/read_single.php';
    
 
     $route = new Route();
