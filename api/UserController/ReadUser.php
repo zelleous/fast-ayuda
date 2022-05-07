@@ -1,5 +1,5 @@
 <?php
-    class ReadSingleUser{
+    class ReadUser{
         public function __construct()
         {
             $this->read();

@@ -145,6 +145,7 @@
 
             $stmt = $this->conn->prepare($query);
 
+            $this->user_id = htmlspecialchars(strip_tags($this->user_id));
             $this->first_name = htmlspecialchars(strip_tags($this->first_name));
             $this->middle_name = htmlspecialchars(strip_tags($this->middle_name));
             $this->last_name = htmlspecialchars(strip_tags($this->last_name));
@@ -170,6 +171,7 @@
             $this->valid_id = htmlspecialchars(strip_tags($this->valid_id));
             $this->user_updated = htmlspecialchars(strip_tags($this->user_updated));
 
+            $stmt->bindParam(':user_id',$this->user_id);
             $stmt->bindParam(':first_name',$this->first_name);
             $stmt->bindParam(':middle_name',$this->middle_name);
             $stmt->bindParam(':last_name',$this->last_name);
@@ -201,6 +203,8 @@
             }
 
             printf("ERROR: %s \n" . $stmt->error);
+
+            return false;
         }
 
         public function readAll(){
@@ -282,33 +286,55 @@
 
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            $this->user_id = $row['user_id'];
-            $this->first_name = $row['first_name'];
-            $this->middle_name = $row['middle_name'];
-            $this->last_name = $row['last_name'];
-            $this->birthday = $row['birthday'];
-            $this->suffix = $row['suffix'];
-            $this->gender = $row['gender'];
-            $this->email = $row['email'];
-            $this->mobile_number = $row['mobile_number'];
-            $this->contact_person = $row['contact_person'];
-            $this->contact_person_number = $row['contact_person_number'];
-            $this->barangay = $row['barangay'];
-            $this->unit_number = $row['unit_number'];
-            $this->lot_and_block_number = $row['lot_and_block_number'];
-            $this->street = $row['street'];
-            $this->phase = $row['phase'];
-            $this->civil_status = $row['civil_status'];
-            $this->name_of_spouse = $row['name_of_spouse'];
-            $this->blood_type = $row['blood_type'];
-            $this->voter = $row['voter'];
-            $this->precint_number = $row['precint_number'];      
-            $this->sector = $row['sector'];
-            $this->valid_id = $row['valid_id'];
-            $this->user_created = $row['user_created'];
-            $this->user_status = $row['user_status'];
-            $this->user_type = $row['user_type'];
-            $this->user_updated = $row['user_updated'];
+
+            $row[0]["user_id"];
+            if (count($row) === 1) {
+                $this->user_id = $row['user_id'];
+                $this->first_name = $row['first_name'];
+                $this->middle_name = $row['middle_name'];
+                $this->last_name = $row['last_name'];
+                $this->birthday = $row['birthday'];
+                $this->suffix = $row['suffix'];
+                $this->gender = $row['gender'];
+                $this->email = $row['email'];
+                $this->mobile_number = $row['mobile_number'];
+                $this->contact_person = $row['contact_person'];
+                $this->contact_person_number = $row['contact_person_number'];
+                $this->barangay = $row['barangay'];
+                $this->unit_number = $row['unit_number'];
+                $this->lot_and_block_number = $row['lot_and_block_number'];
+                $this->street = $row['street'];
+                $this->phase = $row['phase'];
+                $this->civil_status = $row['civil_status'];
+                $this->name_of_spouse = $row['name_of_spouse'];
+                $this->blood_type = $row['blood_type'];
+                $this->voter = $row['voter'];
+                $this->precint_number = $row['precint_number'];      
+                $this->sector = $row['sector'];
+                $this->valid_id = $row['valid_id'];
+                $this->user_created = $row['user_created'];
+                $this->user_status = $row['user_status'];
+                $this->user_type = $row['user_type'];
+                $this->user_updated = $row['user_updated'];
+            }
+           
+        }
+
+        public function deleteUser(){
+            $query = 'DELETE FROM ' . $this->table . ' WHERE user_id = :user_id';
+
+            $stmt = $this->conn->prepare($query);
+
+            $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+
+            $stmt->bindParam(':user_id',$this->user_id);
+
+            if($stmt->execute()){
+                return true;
+            }
+
+            printf("ERROR: %s \n" . $stmt->error);
+
+            return false;
         }
     }

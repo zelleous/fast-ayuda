@@ -43,11 +43,11 @@
 
             if ($forms->createUser()){
                 echo json_encode(array(
-                    'message' => 'SUCCESS'
+                    'message' => 'User created'
                 ));
             }else{
                 echo json_encode(array(
-                    'message' => 'FAILED'
+                    'message' => 'Failed user creation'
                 ));
             }
         }

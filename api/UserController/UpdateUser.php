@@ -9,7 +9,8 @@
             header('Access-Control-Allow-Origin: *');
             header ('Content-Type: application/json');
             header('Access-Control-Allow-Methods: PUT');
-            header('Access-Control-Allow-Header: Access-Control-Allow-Headers,Access-Control-Allow-Methods,Content-Type, Authorization');
+            header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, 
+            Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
             include_once '../../config/Database.php';
             include_once '../../models/UserForms.php';
@@ -21,6 +22,7 @@
 
             $data = json_decode(file_get_contents('php://input'));
 
+            $forms->user_id = $data->user_id;
             $forms->first_name = $data->first_name;
             $forms->middle_name = $data->middle_name;
             $forms->last_name = $data->last_name;
@@ -32,14 +34,21 @@
             $forms->contact_person = $data->contact_person;
             $forms->contact_person_number = $data->contact_person_number;
             $forms->password = $data->password;
+            $forms->barangay = $data->barangay;
+            $forms->unit_number = $data->unit_number;
+            $forms->lot_and_block_number = $data->lot_and_block_number;
+            $forms->street = $data->street;
+            $forms->phase = $data->phase;
+            $forms->sector = $data->sector;
+            $forms->valid_id = $data->valid_id;
 
-            if ($forms->createUser()){
+            if ($forms->updateUser()){
                 echo json_encode(array(
-                    'message' => 'SUCCESS'
+                    'message' => 'User update'
                 ));
             }else{
                 echo json_encode(array(
-                    'message' => 'FAILED'
+                    'message' => 'Failed user update'
                 ));
             }
         }
