@@ -9,9 +9,9 @@
             header('Access-Control-Allow-Origin: *');
             header('Content-Type: application/json');
 
-            include_once '../../config/Database.php';
-            include_once '../../models/UserForms.php';
-
+            include_once '././config/Database.php';
+            include_once '././models/UserForms.php';
+            
             $forms = new UserForms($db);
 
             $forms->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();

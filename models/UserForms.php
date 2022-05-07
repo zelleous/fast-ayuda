@@ -138,8 +138,7 @@
                         blood_type = :blood_type,
                         voter = :voter,
                         precint_number =: precint_number,
-                        sector = :sector,
-                        user_updated = :user_updated
+                        sector = :sector
                     WHERE
                         user_id = :user_id';
 
@@ -169,7 +168,6 @@
             $this->precint_number = htmlspecialchars(strip_tags($this->precint_number));
             $this->sector = htmlspecialchars(strip_tags($this->sector));
             $this->valid_id = htmlspecialchars(strip_tags($this->valid_id));
-            $this->user_updated = htmlspecialchars(strip_tags($this->user_updated));
 
             $stmt->bindParam(':user_id',$this->user_id);
             $stmt->bindParam(':first_name',$this->first_name);
@@ -195,7 +193,6 @@
             $stmt->bindParam(':precint_number', $this->precint_number);
             $stmt->bindParam(':sector',$this->sector);
             $stmt->bindParam(':valid_id', $this->valid_id);
-            $stmt->bindParam(':user_updated', $this->user_updated);
 
 
             if($stmt->execute()){

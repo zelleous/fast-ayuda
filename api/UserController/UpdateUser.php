@@ -9,11 +9,10 @@
             header('Access-Control-Allow-Origin: *');
             header ('Content-Type: application/json');
             header('Access-Control-Allow-Methods: PUT');
-            header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, 
-            Access-Control-Allow-Methods, Authorization, X-Requested-With');
+            header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-            include_once '../../config/Database.php';
-            include_once '../../models/UserForms.php';
+            include_once '././config/Database.php';
+            include_once '././models/UserForms.php';
 
             $databse = new Database();
             $db = $databse->connect();
@@ -39,6 +38,11 @@
             $forms->lot_and_block_number = $data->lot_and_block_number;
             $forms->street = $data->street;
             $forms->phase = $data->phase;
+            $forms->civil_status = $data->civil_status;
+            $forms->name_of_spouse = $data->name_of_spouse;
+            $forms->blood_type = $data->blood_type;
+            $forms->voter= $data->voter;
+            $forms->precint_number = $data->precint_number;
             $forms->sector = $data->sector;
             $forms->valid_id = $data->valid_id;
 

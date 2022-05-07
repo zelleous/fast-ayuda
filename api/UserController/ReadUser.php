@@ -9,8 +9,8 @@
             header('Access-Control-Allow-Origin: *');
             header ('Content-Type: application/json');
 
-            include_once '../../config/Database.php';
-            include_once '../../models/UserForms.php';
+            include_once '././config/Database.php';
+            include_once '././models/UserForms.php';
 
             $databse = new Database();
             $db = $databse->connect();
