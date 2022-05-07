@@ -61,8 +61,7 @@
                         street = :street,
                         phase = :phase,
                         sector = :sector,
-                        valid_id = :valid_id;
-                        user_created = :user_created';
+                        valid_id = :valid_id';
             
             $stmt = $this->conn->prepare($query);
 
@@ -84,7 +83,7 @@
             $this->phase = htmlspecialchars(strip_tags($this->phase));
             $this->valid_id = htmlspecialchars(strip_tags($this->valid_id));
             $this->sector = htmlspecialchars(strip_tags($this->sector));
-            $this->user_created = htmlspecialchars(strip_tags($this->user_created));
+
 
 
             $stmt->bindParam(':first_name',$this->first_name);
@@ -105,7 +104,6 @@
             $stmt->bindParam(':phase', $this->phase);
             $stmt->bindParam(':valid_id',$this->valid_id);
             $stmt->bindParam(':sector',$this->sector);
-            $stmt->bindParam(':user_created', $this->user_created);
 
             if($stmt->execute()){
                 return true;
