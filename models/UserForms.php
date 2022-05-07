@@ -138,7 +138,8 @@
                         blood_type = :blood_type,
                         voter = :voter,
                         precint_number =: precint_number,
-                        sector = :sector
+                        sector = :sector,
+                        valid_id = :valid_id
                     WHERE
                         user_id = :user_id';
 
@@ -275,17 +276,14 @@
                 user_updated
                 FROM '. $this->table . '
                 WHERE 
-                    user_id = ? LIMIT 1';
+                    user_id = ? LIMIT 0,1';
                 
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(1, $this->user_id);
             
-
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $row[0]["user_id"];
-            if (count($row) === 1) {
                 $this->user_id = $row['user_id'];
                 $this->first_name = $row['first_name'];
                 $this->middle_name = $row['middle_name'];
@@ -313,7 +311,6 @@
                 $this->user_status = $row['user_status'];
                 $this->user_type = $row['user_type'];
                 $this->user_updated = $row['user_updated'];
-            }
            
         }
 
