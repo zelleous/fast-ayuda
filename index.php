@@ -11,6 +11,11 @@
     include './api/TransactionController/ReadTrans.php';
     include './api/TransactionController/ReadSingleTrans.php';
     include './api/TransactionController/DeleteTrans.php';
+    include './api/ProgramController/CreateProg.php';
+    include './api/ProgramController/UpdateProg.php';
+    include './api/ProgramController/ReadProg.php';
+    include './api/ProgramController/ReadSingleProg.php';
+    include './api/ProgramController/DeleteProg.php';
 
    
 
@@ -25,6 +30,11 @@
     $route->add('/updatetrans', 'UpdateTrans'); //Update
     $route->add('/readtrans', 'ReadTrans'); //Read
     $route->add('/readsingletrans', 'ReadSingleTrans'); //Read Single
-    $route->add('/deletetrans', 'DeleteTrans'); //Delete
+    $route->add('/deleteprog', 'DeleteProg'); //Delete
+    $route->add('/createprog', 'CreateProg'); //Create
+    $route->add('/updateprog', 'UpdateProg'); //Update
+    $route->add('/readprog', 'ReadProg'); //Read
+    $route->add('/readsingleprog', 'ReadSingleProg'); //Read Single
+    $route->add('/deleteprog', 'DeleteProg'); //Delete
 
     $route->submit();
