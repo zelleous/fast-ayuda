@@ -1,15 +1,14 @@
 <?php
-    class UpdateTrans{
+    class DeleteTrans{
         public function __construct()
         {
             $this->run();
         }
 
-
         public function run(){
             header('Access-Control-Allow-Origin: *');
             header ('Content-Type: application/json');
-            header('Access-Control-Allow-Methods: PUT');
+            header('Access-Control-Allow-Methods: DELETE');
             header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
             include_once '././config/Database.php';
@@ -22,20 +21,15 @@
 
             $data = json_decode(file_get_contents('php://input'));
 
-            $forms->beneficiary = $data->beneficiary;
-            $forms->service = $data->service;
-            $forms->date = $data->date;
-            $forms->location = $data->location;
-            $forms->time = $data->time;
-            $forms->status = $data->ref_number;
+            $forms->transaction_id = $data->transaction_id;
 
-            if ($forms->updateTransaction()){
+            if ($forms->deleteTransaction()){
                 echo json_encode(array(
-                    'message' => 'Transaction updated'
+                    'message' => 'Transaction deleted'
                 ));
             }else{
                 echo json_encode(array(
-                    'message' => 'Failed transaction update'
+                    'message' => 'Failed transaction deletion'
                 ));
             }
         }

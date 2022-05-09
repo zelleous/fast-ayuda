@@ -130,14 +130,14 @@
                         password = :password,
                         barangay = :barangay,
                         unit_number =:unit_number,
-                        lot_and_block_number = :lot_and_block_number.
+                        lot_and_block_number = :lot_and_block_number,
                         street = :street,
                         phase = :phase,
                         civil_status = :civil_status,
                         name_of_spouse = :name_of_spouse,
                         blood_type = :blood_type,
                         voter = :voter,
-                        precint_number =: precint_number,
+                        precint_number = :precint_number,
                         sector = :sector,
                         valid_id = :valid_id
                     WHERE

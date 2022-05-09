@@ -1,7 +1,7 @@
 <?php
     class TransForms{
         private $conn;
-        private $table = 'tbltrans';
+        private $table = 'tbltransactions';
 
         public $transaction_id;
         //personal information
@@ -28,8 +28,7 @@
                         location = :location,
                         time = :time,
                         status = :status,
-                        ref_number =: ref_number,
-                        trans_created = :trans_created';
+                        ref_number = :ref_number';
             
             $stmt = $this->conn->prepare($query);
 
@@ -65,13 +64,13 @@
                     location = :location,
                     time = :time,
                     status = :status,
-                    ref_number = :ref_number,
-                    trans_updated = :trans_updated
+                    ref_number = :ref_number
                     WHERE
                         transaction_id = :transaction_id';
 
             $stmt = $this->conn->prepare($query);
 
+            $this->transaction_id = htmlspecialchars(strip_tags($this->transaction_id));
             $this->beneficiary = htmlspecialchars(strip_tags($this->beneficiary));
             $this->service = htmlspecialchars(strip_tags($this->service));
             $this->date = htmlspecialchars(strip_tags($this->date));
@@ -80,6 +79,7 @@
             $this->status = htmlspecialchars(strip_tags($this->status));
             $this->ref_number = htmlspecialchars(strip_tags($this->ref_number));
           
+            $stmt->bindParam('transaction_id', $this->transaction_id);
             $stmt->bindParam('beneficiary',$this->beneficiary);
             $stmt->bindParam('service',$this->service);
             $stmt->bindParam('date',$this->date);
@@ -96,8 +96,9 @@
             printf("ERROR: %s \n" . $stmt->error);
         }
 
-        public function readAllTrans(){
+        public function readAllTransaction(){
                 $query = 'SELECT
+                transaction_id,
                 beneficiary,
                 service,
                 date,
@@ -115,29 +116,26 @@
             return $stmt;
         }
 
-        public function readSingleUser(){
+        public function readSingleTransaction(){
             $query = 'SELECT
+                        transaction_id,
                         beneficiary,
                         service,
                         date,
                         location,
                         time,
+                        status,
                         ref_number,
                         trans_created,
-                        trans_updated`
-
+                        trans_updated
                     FROM '. $this->table . '
                     WHERE 
-                        transaction_id = :transaction_id';
+                        transaction_id = ? LIMIT 0,1';
 
             $stmt = $this->conn->prepare($query);
-
-            $this->transaction_id = htmlspecialchars(strip_tags($this->transaction_id));
-
-            $stmt->bindParam(':transaction_id , $this->transaction_id ');
+            $stmt->bindParam(1, $this->transaction_id);
 
             $stmt->execute();
-
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $this->transaction_id = $row['transaction_id'];
@@ -148,7 +146,23 @@
             $this->time = $row['time'];
             $this->status = $row['status'];
             $this->ref_number = $row['ref_number'];
+        }
 
-            return $stmt;
+        public function deleteTransaction(){
+            $query = 'DELETE FROM ' . $this->table . ' WHERE transaction_id = :transaction_id';
+
+            $stmt = $this->conn->prepare($query);
+
+            $this->transaction_id = htmlspecialchars(strip_tags($this->transaction_id));
+
+            $stmt->bindParam(':transaction_id',$this->transaction_id);
+
+            if($stmt->execute()){
+                return true;
+            }
+
+            printf("ERROR: %s \n" . $stmt->error);
+
+            return false;
         }
     }

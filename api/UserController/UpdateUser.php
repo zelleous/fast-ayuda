@@ -48,7 +48,7 @@
 
             if ($forms->updateUser()){
                 echo json_encode(array(
-                    'message' => 'User update'
+                    'message' => 'User updated'
                 ));
             }else{
                 echo json_encode(array(
