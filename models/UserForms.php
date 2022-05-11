@@ -75,7 +75,7 @@
             $this->mobile_number = htmlspecialchars(strip_tags($this->mobile_number));
             $this->contact_person = htmlspecialchars(strip_tags($this->contact_person));
             $this->contact_person_number = htmlspecialchars(strip_tags($this->contact_person_number));
-            $this->password = htmlspecialchars(strip_tags($this->password));
+            $this->password = htmlspecialchars(strip_tags(hash('sha256',$this->password)));
             $this->barangay = htmlspecialchars(strip_tags($this->barangay));
             $this->unit_number = htmlspecialchars(strip_tags($this->unit_number));
             $this->lot_and_block_number = htmlspecialchars(strip_tags($this->lot_and_block_number));
@@ -83,8 +83,6 @@
             $this->phase = htmlspecialchars(strip_tags($this->phase));
             $this->valid_id = htmlspecialchars(strip_tags($this->valid_id));
             $this->sector = htmlspecialchars(strip_tags($this->sector));
-
-
 
             $stmt->bindParam(':first_name',$this->first_name);
             $stmt->bindParam(':middle_name',$this->middle_name);
@@ -194,7 +192,6 @@
             $stmt->bindParam(':precint_number', $this->precint_number);
             $stmt->bindParam(':sector',$this->sector);
             $stmt->bindParam(':valid_id', $this->valid_id);
-
 
             if($stmt->execute()){
                 return true;
@@ -311,8 +308,7 @@
                 $this->user_status = $row['user_status'];
                 $this->user_type = $row['user_type'];
                 $this->user_updated = $row['user_updated'];
-           
-        }
+            }
 
         public function deleteUser(){
             $query = 'DELETE FROM ' . $this->table . ' WHERE user_id = :user_id';
@@ -330,5 +326,31 @@
             printf("ERROR: %s \n" . $stmt->error);
 
             return false;
+        }
+
+        public function loginUser(){
+            $query = 'SELECT
+                        user_id,
+                        first_name,
+                        last_name,
+                        mobile_number,
+                        password,
+                        user_status,
+                        user_type
+                   FROM '. $this->table . '
+                   WHERE 
+                        mobile_number = "'.$this->mobile_number.'" AND password = "'.$this->password.'"';
+            
+            $stmt = $this->conn->prepare($query);
+            
+            // $this->mobile_number = htmlspecialchars(strip_tags($this->mobile_number));
+            // $this->password = htmlspecialchars(strip_tags($this->password));
+
+            // $stmt->bindParam(':mobile_number',$this->mobile_number);
+            // $stmt->bindParam(':password',$this->password);
+            
+            $stmt->execute();
+            return $stmt;
+           
         }
     }

@@ -6,6 +6,7 @@
     include './api/UserController/ReadUser.php';
     include './api/UserController/ReadSingleUser.php';
     include './api/UserController/DeleteUser.php';
+    include './api/UserController/LoginUser.php';
     include './api/TransactionController/CreateTrans.php';
     include './api/TransactionController/UpdateTrans.php';
     include './api/TransactionController/ReadTrans.php';
@@ -26,6 +27,7 @@
     $route->add('/read', 'ReadUser'); //Read
     $route->add('/readsingle', 'ReadSingleUser'); //Read Single
     $route->add('/delete', 'DeleteUser'); //Delete
+    $route->add('/login', 'LoginUser'); //Delete
     $route->add('/createtrans', 'CreateTrans'); //Create
     $route->add('/updatetrans', 'UpdateTrans'); //Update
     $route->add('/readtrans', 'ReadTrans'); //Read
