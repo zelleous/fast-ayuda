@@ -27,6 +27,7 @@
                 'date' => $forms->date,
                 'location' => $forms->location,
                 'time' => $forms->time,
+                'status' => $forms->status,
                 'ref_number' => $forms->ref_number,
                 'trans_created' => $forms->trans_created,
                 'trans_updated' => $forms->trans_updated

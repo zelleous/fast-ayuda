@@ -27,7 +27,8 @@
             $forms->date = $data->date;
             $forms->location = $data->location;
             $forms->time = $data->time;
-            $forms->status = $data->ref_number;
+            $forms->status = $data->status;
+            $forms->ref_number = $data->ref_number;
 
             if ($forms->updateTransaction()){
                 echo json_encode(array(

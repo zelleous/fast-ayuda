@@ -104,6 +104,7 @@
                 date,
                 location,
                 time,
+                status,
                 ref_number,
                 trans_created,
                 trans_updated

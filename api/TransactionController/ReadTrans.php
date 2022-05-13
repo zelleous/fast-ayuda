@@ -35,6 +35,7 @@
                         'date' => $date,
                         'location' => $location,
                         'time' => $time,
+                        'status' => $status,
                         'ref_number' => $ref_number,
                         'trans_created' => $trans_created,
                         'trans_updated' => $trans_updated
