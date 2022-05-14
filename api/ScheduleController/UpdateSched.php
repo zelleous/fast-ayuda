@@ -1,5 +1,5 @@
 <?php
-    class UpdateTrans{
+    class UpdateSched{
         public function __construct()
         {
             $this->run();
@@ -13,31 +13,28 @@
             header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
             include_once '././config/Database.php';
-            include_once '././models/TransForms.php';
+            include_once '././models/SchedForms.php';
 
-            $database = new Database();
-            $db = $database->connect();
+            $databse = new Database();
+            $db = $databse->connect();
 
-            $forms = new TransForms($db);
+            $forms = new SchedForms($db);
 
             $data = json_decode(file_get_contents('php://input'));
 
-            $forms->transaction_id = $data->transaction_id;
-            $forms->beneficiary = $data->beneficiary;
-            $forms->service = $data->service;
-            $forms->date = $data->date;
+            $forms->sched_id = $data->sched_id;
+            $forms->name = $data->name;
             $forms->location = $data->location;
-            $forms->time = $data->time;
-            $forms->status = $data->status;
-            $forms->ref_number = $data->ref_number;
+            $forms->start_date = $data->start_date;
+            $forms->end_date = $data->end_date;
 
-            if ($forms->updateTransaction()){
+            if ($forms->updateSchedule()){
                 echo json_encode(array(
-                    'message' => 'Transaction updated'
+                    'message' => 'Schedule updated'
                 ));
             }else{
                 echo json_encode(array(
-                    'message' => 'Failed transaction update'
+                    'message' => 'Failed schedule update'
                 ));
             }
         }

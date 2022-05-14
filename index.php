@@ -17,9 +17,6 @@
         include $filename;
     }
 
-    foreach (glob("api/ScheduleController/*.php") as $filename){
-        include $filename;
-    }
 
 
     $route = new Route();
@@ -42,10 +39,9 @@
     $route->add('/deleteprog', 'DeleteProg'); //Delete
     $route->add('/createsched', 'CreateSched'); //Create
     $route->add('/updatesched', 'UpdateSched'); //Update
-    $route->add('/readsched', 'ReadSched'); //Read
-    $route->add('/readsinglesched', 'ReadSingleSched'); //Read Single
     $route->add('/deletesched', 'DeleteSched'); //Delete
+    $route->add('/readsched', 'ReadSched'); //read
+    $route->add('/readsinglesched', 'ReadSingleSched'); //reSesingleter
 
 
-
-    $route->submit();
+    $route->Submit();

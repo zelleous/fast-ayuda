@@ -38,12 +38,12 @@
             $this->program_status = htmlspecialchars(strip_tags($this->program_status));
             $this->program_view = htmlspecialchars(strip_tags($this->program_view));
           
-            $stmt->bindParam('name',$this->name);
-            $stmt->bindParam('type',$this->type);
-            $stmt->bindParam('details',$this->details);
-            $stmt->bindParam('required_sector',$this->required_sector);
-            $stmt->bindParam('program_status',$this->program_status);
-            $stmt->bindParam('program_view',$this->program_view);
+            $stmt->bindParam(':name',$this->name);
+            $stmt->bindParam(':type',$this->type);
+            $stmt->bindParam(':details',$this->details);
+            $stmt->bindParam(':required_sector',$this->required_sector);
+            $stmt->bindParam(':program_status',$this->program_status);
+            $stmt->bindParam(':program_view',$this->program_view);
 
             if($stmt->execute()){
                 return true;
@@ -74,15 +74,13 @@
             $this->program_status = htmlspecialchars(strip_tags($this->program_status));
             $this->program_view = htmlspecialchars(strip_tags($this->program_view));
           
-            $stmt->bindParam('program_id',$this->program_id);
-            $stmt->bindParam('name',$this->name);
-            $stmt->bindParam('type',$this->type);
-            $stmt->bindParam('details',$this->details);
-            $stmt->bindParam('required_sector',$this->required_sector);
-            $stmt->bindParam('program_status',$this->program_status);
-            $stmt->bindParam('program_view',$this->program_view);
-
-
+            $stmt->bindParam(':program_id',$this->program_id);
+            $stmt->bindParam(':name',$this->name);
+            $stmt->bindParam(':type',$this->type);
+            $stmt->bindParam(':details',$this->details);
+            $stmt->bindParam(':required_sector',$this->required_sector);
+            $stmt->bindParam(':program_status',$this->program_status);
+            $stmt->bindParam(':program_view',$this->program_view);
 
             if($stmt->execute()){
                 return true;

@@ -40,13 +40,13 @@
             $this->status = htmlspecialchars(strip_tags($this->status));
             $this->ref_number = htmlspecialchars(strip_tags($this->ref_number));
           
-            $stmt->bindParam('beneficiary',$this->beneficiary);
-            $stmt->bindParam('service',$this->service);
-            $stmt->bindParam('date',$this->date);
-            $stmt->bindParam('location',$this->location);
-            $stmt->bindParam('time',$this->time);
-            $stmt->bindParam('status',$this->status);
-            $stmt->bindParam('ref_number',$this->ref_number);
+            $stmt->bindParam(':beneficiary',$this->beneficiary);
+            $stmt->bindParam(':service',$this->service);
+            $stmt->bindParam(':date',$this->date);
+            $stmt->bindParam(':location',$this->location);
+            $stmt->bindParam(':time',$this->time);
+            $stmt->bindParam(':status',$this->status);
+            $stmt->bindParam(':ref_number',$this->ref_number);
 
             if($stmt->execute()){
                 return true;
@@ -79,14 +79,14 @@
             $this->status = htmlspecialchars(strip_tags($this->status));
             $this->ref_number = htmlspecialchars(strip_tags($this->ref_number));
           
-            $stmt->bindParam('transaction_id', $this->transaction_id);
-            $stmt->bindParam('beneficiary',$this->beneficiary);
-            $stmt->bindParam('service',$this->service);
-            $stmt->bindParam('date',$this->date);
-            $stmt->bindParam('location',$this->location);
-            $stmt->bindParam('time',$this->time);
-            $stmt->bindParam('status',$this->status);
-            $stmt->bindParam('ref_number',$this->ref_number);
+            $stmt->bindParam(':transaction_id', $this->transaction_id);
+            $stmt->bindParam(':beneficiary',$this->beneficiary);
+            $stmt->bindParam(':service',$this->service);
+            $stmt->bindParam(':date',$this->date);
+            $stmt->bindParam(':location',$this->location);
+            $stmt->bindParam(':time',$this->time);
+            $stmt->bindParam(':status',$this->status);
+            $stmt->bindParam(':ref_number',$this->ref_number);
 
 
             if($stmt->execute()){
