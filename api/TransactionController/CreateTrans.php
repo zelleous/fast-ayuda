@@ -5,7 +5,6 @@
             $this->run();
         }
 
-
         public function run(){
             header('Access-Control-Allow-Origin: *');
             header ('Content-Type: application/json');

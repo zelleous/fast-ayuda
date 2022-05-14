@@ -1,24 +1,26 @@
 <?php
     include './route/route.php';
 
-    include './api/UserController/CreateUser.php';
-    include './api/UserController/UpdateUser.php';
-    include './api/UserController/ReadUser.php';
-    include './api/UserController/ReadSingleUser.php';
-    include './api/UserController/DeleteUser.php';
-    include './api/UserController/LoginUser.php';
-    include './api/TransactionController/CreateTrans.php';
-    include './api/TransactionController/UpdateTrans.php';
-    include './api/TransactionController/ReadTrans.php';
-    include './api/TransactionController/ReadSingleTrans.php';
-    include './api/TransactionController/DeleteTrans.php';
-    include './api/ProgramController/CreateProg.php';
-    include './api/ProgramController/UpdateProg.php';
-    include './api/ProgramController/ReadProg.php';
-    include './api/ProgramController/ReadSingleProg.php';
-    include './api/ProgramController/DeleteProg.php';
+    foreach (glob("api/UserController/*.php") as $filename){
+        include $filename;
+    }
 
-   
+    foreach (glob("api/TransactionController/*.php") as $filename){
+        include $filename;
+    }
+
+    foreach (glob("api/ProgramController/*.php") as $filename){
+        include $filename;
+    }
+
+    foreach (glob("api/ScheduleController/*.php") as $filename){
+        include $filename;
+    }
+
+    foreach (glob("api/ScheduleController/*.php") as $filename){
+        include $filename;
+    }
+
 
     $route = new Route();
 
@@ -38,5 +40,12 @@
     $route->add('/readprog', 'ReadProg'); //Read
     $route->add('/readsingleprog', 'ReadSingleProg'); //Read Single
     $route->add('/deleteprog', 'DeleteProg'); //Delete
+    $route->add('/createsched', 'CreateSched'); //Create
+    $route->add('/updatesched', 'UpdateSched'); //Update
+    $route->add('/readsched', 'ReadSched'); //Read
+    $route->add('/readsinglesched', 'ReadSingleSched'); //Read Single
+    $route->add('/deletesched', 'DeleteSched'); //Delete
+
+
 
     $route->submit();
