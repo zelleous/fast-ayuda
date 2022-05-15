@@ -40,6 +40,8 @@
             $forms->phase = $data->phase;
             $forms->sector = $data->sector;
             $forms->valid_id = $data->valid_id;
+            $forms->user_status = $data->user_status;
+            $forms->user_type = $data->user_type;
 
             if ($forms->createUser()){
                 echo json_encode(array(
