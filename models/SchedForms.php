@@ -140,4 +140,24 @@
             return false;
         }
 
+        public function searchSchedule(){
+            $query = 'SELECT 
+                        location,
+                        start_date,
+                        end_date 
+                    FROM ' . $this->table . ' 
+                    WHERE
+                        name = :name';
+
+            $stmt = $this->conn->prepare($query);
+
+            $this->name = htmlspecialchars(strip_tags($this->name));
+
+            $stmt->bindParam(':name',$this->name);
+            $stmt->execute();
+			
+			return $stmt;
+            
+        }
+
     }
