@@ -26,10 +26,7 @@
           $stmt =  $forms->loginUser();
 
            if($stmt->rowCount() > 0){
-               if($forms->user_status == 0){
-                   echo "please activate your account";
-               }
-               else{
+               
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     $form_arr = array(
                         "status" => true,
@@ -41,8 +38,6 @@
                         "user_type" => $row['user_type']
                     );
                }
-               
-           }
            else{
                $form_arr = array(
                 "status" => false,

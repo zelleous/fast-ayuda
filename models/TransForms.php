@@ -28,7 +28,8 @@
                         location = :location,
                         time = :time,
                         status = :status,
-                        ref_number = :ref_number';
+                        ref_number = :ref_number
+                    ON DUPLICATE KEY UPDATE ref_number =  '. $this->ref_number = mt_rand().'';
             
             $stmt = $this->conn->prepare($query);
 
@@ -38,6 +39,7 @@
             $this->location = htmlspecialchars(strip_tags($this->location));
             $this->time = htmlspecialchars(strip_tags($this->time));
             $this->status = htmlspecialchars(strip_tags($this->status));
+            $this->ref_number = mt_rand();
             $this->ref_number = htmlspecialchars(strip_tags($this->ref_number));
           
             $stmt->bindParam(':beneficiary',$this->beneficiary);
@@ -63,8 +65,7 @@
                     date = :date,
                     location = :location,
                     time = :time,
-                    status = :status,
-                    ref_number = :ref_number
+                    status = :status
                     WHERE
                         transaction_id = :transaction_id';
 
@@ -77,7 +78,6 @@
             $this->location = htmlspecialchars(strip_tags($this->location));
             $this->time = htmlspecialchars(strip_tags($this->time));
             $this->status = htmlspecialchars(strip_tags($this->status));
-            $this->ref_number = htmlspecialchars(strip_tags($this->ref_number));
           
             $stmt->bindParam(':transaction_id', $this->transaction_id);
             $stmt->bindParam(':beneficiary',$this->beneficiary);
@@ -86,7 +86,6 @@
             $stmt->bindParam(':location',$this->location);
             $stmt->bindParam(':time',$this->time);
             $stmt->bindParam(':status',$this->status);
-            $stmt->bindParam(':ref_number',$this->ref_number);
 
 
             if($stmt->execute()){
