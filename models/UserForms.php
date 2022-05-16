@@ -60,6 +60,8 @@
                         lot_and_block_number = :lot_and_block_number,
                         street = :street,
                         phase = :phase,
+                        user_status = :user_status,
+                        user_type = :user_type,
                         sector = :sector,
                         valid_id = :valid_id';
             
@@ -83,6 +85,8 @@
             $this->phase = htmlspecialchars(strip_tags($this->phase));
             $this->valid_id = htmlspecialchars(strip_tags($this->valid_id));
             $this->sector = htmlspecialchars(strip_tags($this->sector));
+            $this->user_status = htmlspecialchars(strip_tags($this->user_status));
+            $this->user_type = htmlspecialchars(strip_tags($this->user_type));
 
             $stmt->bindParam(':first_name',$this->first_name);
             $stmt->bindParam(':middle_name',$this->middle_name);
@@ -102,6 +106,8 @@
             $stmt->bindParam(':phase', $this->phase);
             $stmt->bindParam(':valid_id',$this->valid_id);
             $stmt->bindParam(':sector',$this->sector);
+            $stmt->bindParam(':user_status',$this->user_status);
+            $stmt->bindParam(':user_type',$this->user_type);
 
             if($stmt->execute()){
                 return true;

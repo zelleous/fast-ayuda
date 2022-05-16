@@ -42,6 +42,7 @@
     $route->add('/deletesched', 'DeleteSched'); //Delete
     $route->add('/readsched', 'ReadSched'); //read
     $route->add('/readsinglesched', 'ReadSingleSched'); //reSesingleter
+    $route->add('/searchsched', 'SearchSched'); //reSesingleter
 
 
     $route->Submit();
