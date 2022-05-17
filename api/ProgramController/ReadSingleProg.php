@@ -12,8 +12,8 @@
             include_once '././config/Database.php';
             include_once '././models/ProgramForms.php';
             
-            $databse = new Database();
-            $db = $databse->connect();
+            $database = new Database();
+            $db = $database->connect();
 
             $forms = new ProgramForms($db);
 
