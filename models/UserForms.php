@@ -77,7 +77,7 @@
             $this->mobile_number = htmlspecialchars(strip_tags($this->mobile_number));
             $this->contact_person = htmlspecialchars(strip_tags($this->contact_person));
             $this->contact_person_number = htmlspecialchars(strip_tags($this->contact_person_number));
-            $this->password = htmlspecialchars(strip_tags(hash('sha256',$this->password)));
+            $this->password = htmlspecialchars(strip_tags(password_hash($this->password,PASSWORD_DEFAULT)));
             $this->barangay = htmlspecialchars(strip_tags($this->barangay));
             $this->unit_number = htmlspecialchars(strip_tags($this->unit_number));
             $this->lot_and_block_number = htmlspecialchars(strip_tags($this->lot_and_block_number));
@@ -345,18 +345,35 @@
                         user_type
                    FROM '. $this->table . '
                    WHERE 
-                        mobile_number = "'.$this->mobile_number.'" AND password = "'.$this->password.'"';
+                        mobile_number = :mobile_number';
             
             $stmt = $this->conn->prepare($query);
-            
-            // $this->mobile_number = htmlspecialchars(strip_tags($this->mobile_number));
-            // $this->password = htmlspecialchars(strip_tags($this->password));
 
-            // $stmt->bindParam(':mobile_number',$this->mobile_number);
-            // $stmt->bindParam(':password',$this->password);
-            
-            $stmt->execute();
-            return $stmt;
+            $this->mobile_number = htmlspecialchars(strip_tags($this->mobile_number));
+            $this->password = htmlspecialchars(strip_tags($this->password));
+
+			$stmt->bindParam(':mobile_number',$this->mobile_number);
+
+			$stmt->execute();
+			$num = $stmt-> rowCount();
+
+			if ($num===1){
+				$rows = $stmt->fetch(PDO::FETCH_ASSOC);
+				if (password_verify($this->password,$rows['password'])){
+
+					$this->user_id = $rows['user_id'];
+					$this->first_name = $rows['first_name'];
+					$this->last_name = $rows['last_name'];
+					$this->mobile_number = $rows['mobile_number'];
+					$this->password = $rows['password'];
+					$this->user_status = $rows['user_status'];
+					$this->user_type = $rows['user_type'];
+					return true;
+
+				}
+			}
+
+			return false;
            
         }
     }
