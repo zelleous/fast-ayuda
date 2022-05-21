@@ -31,6 +31,7 @@
     $route->add('/updatetrans', 'UpdateTrans'); //Update
     $route->add('/readtrans', 'ReadTrans'); //Read
     $route->add('/readsingletrans', 'ReadSingleTrans'); //Read Single
+    $route->add('/readsingletransuser', 'ReadSingleTransUser'); //Read Single
     $route->add('/deleteprog', 'DeleteProg'); //Delete
     $route->add('/createprog', 'CreateProg'); //Create
     $route->add('/updateprog', 'UpdateProg'); //Update

@@ -2,9 +2,13 @@
     class TransForms{
         private $conn;
         private $table = 'tbltransactions';
+        private $table_residents = 'tblresidents';
 
         public $transaction_id;
         //personal information
+        public $first_name;
+        public $middle_name;
+        public $last_name;
         public $beneficiary;
         public $service;
         public $date;
@@ -114,6 +118,48 @@
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt;
+        }
+
+        public function readSingleTransUser(){
+            $query = 'SELECT
+                        t.transaction_id,
+                        r.user_id,
+                        r.first_name,
+                        r.middle_name,
+                        r.last_name,                      
+                        service,
+                        date,
+                        location,
+                        time,
+                        status,
+                        ref_number,
+                        trans_created,
+                        trans_updated
+                    FROM '. $this->table . ' t
+                    LEFT JOIN  '.$this->table_residents.' r
+                    ON t.user_id = r.user_id
+                    WHERE 
+                        transaction_id = ? LIMIT 0,1';
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(1, $this->transaction_id);
+
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->transaction_id = $row['transaction_id'];
+            $this->user_id = $row['user_id'];
+            $this->first_name = $row['first_name'];
+            $this->middle_name = $row['middle_name'];
+            $this->last_name = $row['last_name'];
+            $this->service = $row['service'];
+            $this->date = $row['date'];
+            $this->location = $row['location'];
+            $this->time = $row['time'];
+            $this->status = $row['status'];
+            $this->ref_number = $row['ref_number'];
+            $this->trans_created = $row['trans_created'];
+            $this->trans_updated = $row['trans_updated'];
         }
 
         public function readSingleTransaction(){
